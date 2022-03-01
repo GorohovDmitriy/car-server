@@ -43,6 +43,30 @@ class CarsControllers {
       res.status(400).json({ message: "car not found" });
     }
   }
+
+  async editCar(req, res) {
+    try {
+      const { name, price, description, reserve, speed, used, mileage } =
+        req.body;
+      const { id } = req.params;
+
+      const editCar = await Cars.findOneAndUpdate(id, {
+        name,
+        price,
+        description,
+        reserve,
+        speed,
+        used,
+        mileage,
+        _id: id,
+      });
+      
+      await editCar.save();
+      return res.json(editCar);
+    } catch (error) {
+      res.status(400).json({ message: "car not found" });
+    }
+  }
 }
 
 module.exports = new CarsControllers();
