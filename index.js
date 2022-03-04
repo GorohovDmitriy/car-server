@@ -10,7 +10,7 @@ app.use(express.json());
 app.use("/auth", authRoute);
 app.use("/cars", carsRoute);
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const start = async () => {
   try {
     await mongoose.connect(
