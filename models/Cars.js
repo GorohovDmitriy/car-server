@@ -5,7 +5,7 @@ const Cars = new Schema({
   price: { type: Number, required: true },
   description: { type: String, required: true },
   reserve: { type: Number, required: true },
-  file: [{ type: String, required: true }],
+  file: { type: String, required: true },
   speed: { type: Number, required: true },
   used: { type: Boolean, default: false },
   mileage: { type: Number },
