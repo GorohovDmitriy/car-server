@@ -14,7 +14,7 @@ class CarsControllers {
         speed,
         used,
         mileage,
-        file: file,
+        file: [...file],
       });
 
       await newCar.save();
@@ -64,7 +64,7 @@ class CarsControllers {
       await editCar.save();
       return res.json(editCar);
     } catch (error) {
-      res.status(400).json({ message: "car not found", editCar });
+      res.status(400).json({ message: "car not found" });
     }
   }
 }
