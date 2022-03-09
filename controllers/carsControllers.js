@@ -50,19 +50,22 @@ class CarsControllers {
         req.body;
       const { id } = req.params;
 
-      const editCar = await Cars.findOneAndUpdate(id, {
-        name,
-        price,
-        description,
-        reserve,
-        speed,
-        used,
-        mileage,
-        _id: id,
+      const editCar = Cars.findOneAndUpdate(
+        { _id: id },
+        {
+          name,
+          price,
+          description,
+          reserve,
+          speed,
+          used,
+          mileage,
+          _id: id,
+        }
+      ).exec((err, car) => {
+        if (err) return res.status(500).json({ err: err.message });
+        res.json({ car, message: "Successfully updated" });
       });
-
-      await editCar.save();
-      return res.json(editCar);
     } catch (error) {
       res.status(400).json({ message: "car not found" });
     }
