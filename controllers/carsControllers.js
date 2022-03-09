@@ -70,6 +70,22 @@ class CarsControllers {
       res.status(400).json({ message: "car not found" });
     }
   }
+
+  async deleteCar(req, res) {
+    try {
+      Cars.find({ _id: req.params.id })
+        .remove()
+        .exec((err, removeCar) => {
+          if (!err) {
+            return res.json({ message: "remove car" });
+          } else {
+            return res.json({ message: "error", removeCar });
+          }
+        });
+    } catch (error) {
+      res.status(400).json({ message: "car not delete" });
+    }
+  }
 }
 
 module.exports = new CarsControllers();
